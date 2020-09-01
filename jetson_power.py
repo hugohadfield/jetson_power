@@ -13,7 +13,7 @@ def loop():
         with open(file, "r") as fobj:
             milliwatts = int(fobj.readline())
             print(milliwatts, end='\t')
-        print()
+    print()
 
 
 def print_titles():
