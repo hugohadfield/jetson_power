@@ -29,6 +29,6 @@ if __name__ == '__main__':
     print_titles()
     tstart = time.time()
     while True:
-        time.sleep(0.01)
+        time.sleep(1.0)
         print(time.time() - tstart, end='\t')
         loop()
