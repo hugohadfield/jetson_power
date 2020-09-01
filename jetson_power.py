@@ -1,4 +1,6 @@
 
+import time
+
 rail_names = {
 "VDD_IN": "/sys/bus/i2c/drivers/ina3221x/0-0041/iio:device1/in_power0_input",
 "VDD_SYS_GPU": "/sys/bus/i2c/drivers/ina3221x/0-0040/iio:device0/in_power0_input",
@@ -23,5 +25,10 @@ def print_titles():
 
 
 if __name__ == '__main__':
+    print('Time', end='\t')
     print_titles()
-    loop()
+    tstart = time.time()
+    while True:
+        time.sleep(0.01)
+        print(time.time() - tstart, end='\t')
+        loop()
