@@ -12,33 +12,34 @@ rail_names = {
 "VDD_4V0_WIFI": "/sys/bus/i2c/drivers/ina3221x/0-0040/iio:device0/in_power2_input"
 }
 
+
+def print_echo(string, file_echo=None, **kwargs):
+    print(string, **kwargs)
+    if file_echo is not None:
+        print(string, file=file_echo, **kwargs)
+
+
 def loop(file_echo=None):
     for rail, file in rail_names.items():
         with open(file, "r") as fobj:
             milliwatts = int(fobj.readline())
-            print(milliwatts, end='\t')
-            if file_echo is not None:
-                print(milliwatts, end='\t', file=file_echo)
-    print()
+            print_echo(milliwatts, end='\t', file_echo=file_echo)
+    print_echo("", file_echo=file_echo)
 
 
 def print_titles(file_echo=None):
     for rail, file in rail_names.items():
-        print(rail, end='\t')
-        if file_echo is not None:
-            print(rail, end='\t', file=file_echo)
-    print()
+        print_echo(rail, end='\t', file_echo=file_echo)
+    print_echo("", file_echo=file_echo)
 
 
 if __name__ == '__main__':
-    with open(output_file, 'w') as ofobj:
-        print('Time', end='\t')
-        print('Time', end='\t', file=ofobj)
-        print_titles(file_echo=ofobj)
+    with open(output_file, 'w') as file_echo:
+        print_echo("Time", file_echo=file_echo)
+        print_titles(file_echo=file_echo)
         tstart = time.time()
         while True:
             time.sleep(1.0)
             this_time = time.time() - tstart
-            print(this_time, end='\t')
-            print(this_time, end='\t', file=ofobj)
-            loop(file_echo=ofobj)
+            print_echo(this_time, end='\t', file_echo=file_echo)
+            loop(file_echo=file_echo)
