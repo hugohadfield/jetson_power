@@ -10,7 +10,7 @@ rail_names = {
 
 def loop():
     for rail, file in rail_names.items():
-        with open(VDD_IN, "r") as fobj:
+        with open(file, "r") as fobj:
             milliwatts = int(fobj.readline())
             print(milliwatts, end='\t')
         print()
