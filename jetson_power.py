@@ -35,7 +35,7 @@ def print_titles(file_echo=None):
 
 if __name__ == '__main__':
     with open(output_file, 'w') as file_echo:
-        print_echo("Time", file_echo=file_echo)
+        print_echo("Time", end='\t', file_echo=file_echo)
         print_titles(file_echo=file_echo)
         tstart = time.time()
         while True:
